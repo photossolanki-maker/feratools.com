@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find and Replace - Fera Tools</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand"><h1>🛠️ Fera Tools</h1></div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#tools">Tools</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../contact.html">Contact Us</a></li>
+                <li><button class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="tool-page">
+        <div class="container">
+            <a href="../index.html#tools" class="back-link">← Back to Tools</a>
+            <div class="tool-header">
+                <h1>Find and Replace</h1>
+                <p>Find and replace text</p>
+            </div>
+            <div class="tool-container">
+                <div class="form-group"><label for="text">Text:</label><textarea id="text"></textarea></div><div class="form-group"><label for="find">Find:</label><input type="text" id="find"></div><div class="form-group"><label for="replace">Replace with:</label><input type="text" id="replace"></div>
+                <button onclick="processTool()" class="btn btn-primary">Process</button>
+                <button onclick="clearAll()" class="btn btn-secondary">Clear</button>
+                <div class="result-container" id="result" style="display:none;">
+                    <h3>Result:</h3>
+                    <div class="result-output" id="output"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../script.js"></script>
+    <script>
+        function processTool() {
+            const text = document.getElementById('text').value;
+            const find = document.getElementById('find').value;
+            const replace = document.getElementById('replace').value;
+            if (!find) { alert('Enter text to find'); return; }
+            const result = text.split(find).join(replace);
+            document.getElementById('output').textContent = result;
+            document.getElementById('result').style.display = 'block';
+        }
+        function clearAll() {
+            document.querySelectorAll('input, textarea, select').forEach(el => {
+                if (el.type === 'checkbox') el.checked = false;
+                else el.value = '';
+            });
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

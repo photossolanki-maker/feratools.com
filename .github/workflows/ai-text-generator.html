@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Generator - Fera Tools</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🛠️ Fera Tools</h1>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#tools">Tools</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../contact.html">Contact Us</a></li>
+                <li><button class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="tool-page">
+        <div class="container">
+            <a href="../index.html#tools" class="back-link">← Back to Tools</a>
+            <div class="tool-header">
+                <h1>AI Text Generator</h1>
+                <p>Generate creative text content using AI-powered algorithms</p>
+            </div>
+            <div class="tool-container">
+                <div class="form-group">
+                    <label for="prompt">Enter your prompt or topic:</label>
+                    <textarea id="prompt" placeholder="e.g., Write a short story about a robot learning to paint"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="length">Text Length:</label>
+                    <select id="length">
+                        <option value="short">Short (50-100 words)</option>
+                        <option value="medium" selected>Medium (100-300 words)</option>
+                        <option value="long">Long (300-500 words)</option>
+                    </select>
+                </div>
+                <button onclick="generateText()" class="btn btn-primary">Generate Text</button>
+                <button onclick="clearAll()" class="btn btn-secondary">Clear</button>
+                <div class="result-container" id="result" style="display:none;">
+                    <h3>Generated Text:</h3>
+                    <div class="result-output" id="output"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+    <script>
+        const templates = {
+            short: ['Once upon a time', 'In a world where', 'The story begins', 'It was a day'],
+            medium: ['In the heart of the digital age', 'The future holds many possibilities', 'Technology continues to evolve'],
+            long: ['As we navigate through the complexities of modern life', 'The intersection of technology and humanity']
+        };
+
+        function generateText() {
+            const prompt = document.getElementById('prompt').value.trim();
+            const length = document.getElementById('length').value;
+            
+            if (!prompt) {
+                alert('Please enter a prompt');
+                return;
+            }
+
+            const words = length === 'short' ? 75 : length === 'medium' ? 200 : 400;
+            const sentences = Math.ceil(words / 15);
+            
+            let generated = '';
+            const wordsList = prompt.split(' ');
+            const baseWords = wordsList.length > 0 ? wordsList : ['technology', 'innovation', 'future', 'digital', 'world'];
+            
+            for (let i = 0; i < sentences; i++) {
+                const template = templates[length][i % templates[length].length];
+                const randomWords = baseWords[Math.floor(Math.random() * baseWords.length)];
+                generated += template + ', ' + randomWords + ' plays a crucial role. ';
+                
+                if (i < sentences - 1) {
+                    generated += 'This development opens new possibilities for ' + randomWords + '. ';
+                }
+            }
+
+            document.getElementById('output').textContent = generated.trim();
+            document.getElementById('result').style.display = 'block';
+        }
+
+        function clearAll() {
+            document.getElementById('prompt').value = '';
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

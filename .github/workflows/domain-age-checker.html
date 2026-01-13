@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain Age Checker - Fera Tools</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand"><h1>🛠️ Fera Tools</h1></div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#tools">Tools</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../contact.html">Contact Us</a></li>
+                <li><button class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="tool-page">
+        <div class="container">
+            <a href="../index.html#tools" class="back-link">← Back to Tools</a>
+            <div class="tool-header">
+                <h1>Domain Age Checker</h1>
+                <p>Check domain registration age</p>
+            </div>
+            <div class="tool-container">
+                <div class="form-group"><label for="input">Input:</label><textarea id="input" placeholder="Enter your input here..."></textarea></div>
+                <button onclick="processTool()" class="btn btn-primary">Process</button>
+                <button onclick="clearAll()" class="btn btn-secondary">Clear</button>
+                <div class="result-container" id="result" style="display:none;">
+                    <h3>Result:</h3>
+                    <div class="result-output" id="output"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../script.js"></script>
+    <script>
+        function processTool() {
+            const input = document.getElementById('input').value.trim();
+            if (!input) { alert('Please enter input'); return; }
+            document.getElementById('output').textContent = 'Processed: ' + input;
+            document.getElementById('result').style.display = 'block';
+        }
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

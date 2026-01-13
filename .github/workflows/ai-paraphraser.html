@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Paraphraser - Fera Tools</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand"><h1>🛠️ Fera Tools</h1></div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#tools">Tools</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../contact.html">Contact Us</a></li>
+                <li><button class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="tool-page">
+        <div class="container">
+            <a href="../index.html#tools" class="back-link">← Back to Tools</a>
+            <div class="tool-header">
+                <h1>AI Paraphraser</h1>
+                <p>Rephrase text while keeping the meaning</p>
+            </div>
+            <div class="tool-container">
+                <div class="form-group">
+                    <label for="text">Enter text to paraphrase:</label>
+                    <textarea id="text" placeholder="Enter your text here..."></textarea>
+                </div>
+                <button onclick="paraphrase()" class="btn btn-primary">Paraphrase</button>
+                <button onclick="clearAll()" class="btn btn-secondary">Clear</button>
+                <div class="result-container" id="result" style="display:none;">
+                    <h3>Paraphrased Text:</h3>
+                    <div class="result-output" id="output"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../script.js"></script>
+    <script>
+        const synonyms = {
+            'the': ['the', 'a', 'an'],
+            'is': ['is', 'are', 'becomes'],
+            'to': ['to', 'towards', 'for'],
+            'and': ['and', 'plus', 'along with'],
+            'of': ['of', 'from', 'belonging to'],
+            'in': ['in', 'within', 'inside'],
+            'for': ['for', 'on behalf of', 'in favor of'],
+            'with': ['with', 'alongside', 'together with']
+        };
+        function paraphrase() {
+            const text = document.getElementById('text').value.trim();
+            if (!text) { alert('Please enter text'); return; }
+            let paraphrased = text.split(' ').map(word => {
+                const lower = word.toLowerCase().replace(/[.,!?;:]/g, '');
+                if (synonyms[lower]) {
+                    const syns = synonyms[lower];
+                    return syns[Math.floor(Math.random() * syns.length)];
+                }
+                return word;
+            }).join(' ');
+            document.getElementById('output').textContent = paraphrased;
+            document.getElementById('result').style.display = 'block';
+        }
+        function clearAll() {
+            document.getElementById('text').value = '';
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

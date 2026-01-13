@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator - Fera Tools</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand"><h1>🛠️ Fera Tools</h1></div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#tools">Tools</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../contact.html">Contact Us</a></li>
+                <li><button class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="tool-page">
+        <div class="container">
+            <a href="../index.html#tools" class="back-link">← Back to Tools</a>
+            <div class="tool-header">
+                <h1>BMI Calculator</h1>
+                <p>Calculate Body Mass Index</p>
+            </div>
+            <div class="tool-container">
+                <div class="form-group"><label for="weight">Weight (kg):</label><input type="number" id="weight" step="0.1"></div><div class="form-group"><label for="height">Height (cm):</label><input type="number" id="height" step="0.1"></div>
+                <button onclick="processTool()" class="btn btn-primary">Process</button>
+                <button onclick="clearAll()" class="btn btn-secondary">Clear</button>
+                <div class="result-container" id="result" style="display:none;">
+                    <h3>Result:</h3>
+                    <div class="result-output" id="output"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../script.js"></script>
+    <script>
+        function processTool() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value) / 100;
+            if (!weight || !height) { alert('Enter weight and height'); return; }
+            const bmi = weight / (height * height);
+            let category = '';
+            if (bmi < 18.5) category = 'Underweight';
+            else if (bmi < 25) category = 'Normal weight';
+            else if (bmi < 30) category = 'Overweight';
+            else category = 'Obese';
+            document.getElementById('output').textContent = `BMI: ${bmi.toFixed(2)}\nCategory: ${category}`;
+            document.getElementById('result').style.display = 'block';
+        }
+        function clearAll() {
+            document.querySelectorAll('input, textarea, select').forEach(el => el.value = '');
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
